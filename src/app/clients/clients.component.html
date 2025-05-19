@@ -1,0 +1,61 @@
+<div class="container mt-2">
+  <ng-container *ngIf="getCustomers() | async as list_customers; else FailureOrLoading">
+    <div class="card">
+      <div class="card-header">Customers</div>
+      <div class="card-body">
+        <div>
+          <!--{{SearchFormGroup.value.keyword| json}}-->
+          <form method="get">
+            <div class="input-group">
+              <label for="" class="input-group-text">Search</label>
+              <input type="text" formControlName="keyword" class="form-control" placeholder="Search">
+              <button type="submit" class="btn btn-info">
+                <i class="bi bi-search"></i>
+              </button>
+            </div>
+
+          </form>
+        </div>
+        <table class="table">
+          <thead>
+          <tr>
+            <th>
+              Id
+            </th>
+            <th>
+              Name
+            </th>
+            <th>
+              Email
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let customer of list_customers">
+            <td>{{customer.id}}</td>
+            <td>{{customer.name}}</td>
+            <td>{{customer.email}}</td>
+            <td>
+              <button class="btn btn-danger" (click)="handleDeleteCustomer(customer)">
+                <i class="bi bi-trash-fill"></i>
+                Delete
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #FailureOrLoading >
+    <ng-container *ngIf="getMessageError(); else Loading">
+      <div class="alert alert-danger text-danger" role="alert">
+        {{getMessageError()}}
+      </div>
+    </ng-container>
+    <ng-template #Loading>
+      Loading .....
+    </ng-template>
+  </ng-template>
+</div>
+
