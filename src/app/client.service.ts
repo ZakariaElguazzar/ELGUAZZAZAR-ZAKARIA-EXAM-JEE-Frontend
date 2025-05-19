@@ -14,6 +14,10 @@ export class ClientService {
     return this.http.delete("http://localhost:8080/clients/delte"+id);
   }
 
+  public getCustomers() : Observable<Array<Client>>{
+    return this.http.get<Array<Client>>("http://localhost:8080/clients/list_customer");
+  }
+
   // @ts-ignore
   public searchCustomer( Keyword:String) : Observable<Array<Customer>>{
     return this.http.get<Array<Client>>("http://localhost:8080/clients/search_customer?keyword="+Keyword);

@@ -1,11 +1,14 @@
 <div class="container mt-2">
-  <ng-container *ngIf="getCustomers() | async as list_customers; else FailureOrLoading">
+  <!--<div *ngIf="getMessageError()">
+    {{getMessageError() | json}}
+  </div>-->
+  <ng-container *ngIf="getClients() | async as list_clients; else FailureOrLoading">
     <div class="card">
       <div class="card-header">Customers</div>
       <div class="card-body">
-        <div>
+        <div *ngIf="getSearchFormGroup() as SearchFormGroup">
           <!--{{SearchFormGroup.value.keyword| json}}-->
-          <form method="get">
+          <form method="get"  [formGroup]=SearchFormGroup (ngSubmit)="handleSearchFormSubmit()">
             <div class="input-group">
               <label for="" class="input-group-text">Search</label>
               <input type="text" formControlName="keyword" class="form-control" placeholder="Search">
@@ -31,12 +34,12 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let customer of list_customers">
-            <td>{{customer.id}}</td>
-            <td>{{customer.name}}</td>
-            <td>{{customer.email}}</td>
+          <tr *ngFor="let client of list_clients">
+            <td>{{client.id}}</td>
+            <td>{{client.name}}</td>
+            <td>{{client.email}}</td>
             <td>
-              <button class="btn btn-danger" (click)="handleDeleteCustomer(customer)">
+              <button class="btn btn-danger" (click)="handleDeleteCustomer(client)">
                 <i class="bi bi-trash-fill"></i>
                 Delete
               </button>
@@ -58,4 +61,3 @@
     </ng-template>
   </ng-template>
 </div>
-

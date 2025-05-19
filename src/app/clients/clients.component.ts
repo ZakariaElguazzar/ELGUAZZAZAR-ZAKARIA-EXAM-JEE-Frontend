@@ -1,12 +1,18 @@
 import {Component, OnInit} from '@angular/core';
 import {Client} from '../model/model';
 import {catchError, map, Observable, throwError} from 'rxjs';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {ClientService} from '../client.service';
+import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-clients',
-  imports: [],
+  imports: [
+    ReactiveFormsModule,
+    NgIf,
+    AsyncPipe,
+    NgForOf
+  ],
   templateUrl: './clients.component.html',
   styleUrl: './clients.component.css'
 })
@@ -25,7 +31,7 @@ export class ClientsComponent implements OnInit{
     this.handleSearchFormSubmit();
   }
 
-  public getCustomers(){
+  public getClients(){
     return this.clients;
   }
   public getMessageError(){
