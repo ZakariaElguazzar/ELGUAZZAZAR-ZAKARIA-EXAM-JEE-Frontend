@@ -20,7 +20,7 @@ export class LoginService {
         headers:new HttpHeaders().set("Content-Type", "application/x-www-form-urlencoded")
       }
     let params = new HttpParams().set("username",username).set("password",password);
-    return this.http.post("http/login",params,options);
+    return this.http.post("http://localhost:8080/auth/login",params,options);
   }
 
   loadProfile(data:any) {
